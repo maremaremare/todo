@@ -1,75 +1,79 @@
-{% templatetag openblock %} load staticfiles {% templatetag closeblock %}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<!--[if lt IE 7]> <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="todo" ng-controller="main">
+<!--<![endif]-->
+
+<head>
     <meta charset="utf-8">
-    <title>{% templatetag openblock %} block title {% templatetag closeblock %}{{ project_name }}{% templatetag openblock %} endblock title {% templatetag closeblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ STATIC_URL }}bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
 
-    <!-- Le styles -->
-    <link href="{% templatetag openblock %} static 'css/bootstrap.min.css' {% templatetag closeblock %}" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+</head>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<body>
+    {% verbatim %}
 
-    <!-- This file store project specific CSS -->
-    <link href="{% templatetag openblock %} static 'css/project.css' {% templatetag closeblock %}" rel="stylesheet">
 
-    <!-- Use this to quickly test CSS changes in a template,
-        then move to project.css -->
-    {% templatetag openblock %} block extra_css {% templatetag closeblock %}{% templatetag openblock %} endblock extra_css {% templatetag closeblock %}
-  </head>
+    <div id="wrap">
 
-  <body>
+        <!-- Begin page content -->
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{{ project_name }}</a>
+
+                <div class="page-header">
+                    <h1>To do list</h1>
+                </div>
+                <ul ng-repeat="task in tasklist">
+                    <li class="taskli" >
+
+                        <editablespan   model="task.title" on-ready="save(task)" span-class="info" input-class="{{task.id}}" input-type="text">
+                        </editablespan>
+                        <button type="button" class="close" ng-click="delete(task)">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                    </li>
+
+                </ul>
+                <div class="add">
+                    <form ng-show="visible" ng-submit="save(task)">
+                        <input type="text" ng-model="task.title" placeholder="Your task" ng-required/>
+
+                        <button class="btn" type="submit">Save</button>
+                    </form>
+                    <a class="btn" ng-hide="visible" ng-click="visible = true"><i class="icon-plus"></i>Add</a>
+                    <a class="btn" ng-show="visible" ng-click="visible = false">Cancel</a>
+                </div>
+            </div>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+
+        <div id="push"></div>
     </div>
 
-    <div class="container">
+    <div id="footer">
+        <div class="container">
 
-      <h1>{% templatetag openblock %} block page_title {% templatetag closeblock %}Example Base Template{% templatetag openblock %} endblock page_title {% templatetag closeblock %}</h1>
+        </div>
+    </div>
 
-      {% templatetag openblock %} block content {% templatetag closeblock %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% templatetag openblock %} endblock content {% templatetag closeblock %}
 
-    </div> <!-- /container -->
+    {% endverbatim %}
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="{% templatetag openblock %} static 'js/bootstrap.min.js' {% templatetag closeblock %}"></script>
+</body>
+<script type="text/javascript" src="{{ STATIC_URL }}bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bower_components/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}bower_components/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/todo.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/editable.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/app/task.js"></script>
 
-    <!-- place project specific Javascript in this file -->
-    <script src="{% templatetag openblock %} static 'js/project.js' {% templatetag closeblock %}"></script>
-
-    {% templatetag openblock %} block extra_js {% templatetag closeblock %}{% templatetag openblock %} endblock extra_js {% templatetag closeblock %}
-  </body>
 </html>

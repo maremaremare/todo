@@ -172,15 +172,12 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-
-
-    # Database migration helpers:
-    'south',
+'rest_framework',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-
+'tasks',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -218,6 +215,14 @@ LOGGING = {
         },
     }
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    )
+}
+
 ########## END LOGGING CONFIGURATION
 
 #

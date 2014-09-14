@@ -1,23 +1,34 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
+from rest_framework import routers, serializers, viewsets
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.conf import settings
+from tasks.models import Task
 admin.autodiscover()
+
+
+class TaskSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ('title','id')
+
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+router = routers.DefaultRouter()
+router.register(r'tasks', TaskViewSet)
 
 urlpatterns = patterns('',
                        url(r'^$',
                            TemplateView.as_view(template_name='base.html')),
-
-                       # Examples:
-                       # url(r'^$', 'todo.views.home', name='home'),
-                       # url(r'^todo/', include('todo.foo.urls')),
-
-                       # Uncomment the admin/doc line below to enable admin documentation:
-                       # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-                       # Uncomment the next line to enable the admin:
+                       url(r'^', include(router.urls)),
+                       url(r'^api-auth/', include('rest_framework.urls',
+                                                  namespace='rest_framework')),
                        url(r'^admin/', include(admin.site.urls)),
                        )
 if settings.DEBUG:

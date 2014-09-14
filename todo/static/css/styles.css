@@ -1,0 +1,22 @@
+.taskli div {
+    width:90%;
+    float:left!important;
+    margin-bottom:5px;
+}
+
+.close {
+    float:left;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.add {
+    margin-left:30px;
+}
+
+.ng-binding {
+    min-width:100px;
+    display: inline-block;
+}
