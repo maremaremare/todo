@@ -16,7 +16,7 @@ ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))#os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
@@ -26,4 +26,4 @@ STATICFILES_DIRS = (
 
 SECRET_KEY = 'lg(sk)u*vp(3m12$+4*4q_8^-uc0v_y2wwnm5_v*_cil+n*_do'
 
-ROOT_URLCONF = 'todo.todo.urls'
+ROOT_URLCONF = 'todo.urls'#'todo.todo.urls'
