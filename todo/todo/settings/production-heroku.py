@@ -1,6 +1,35 @@
 # Parse database configuration from $DATABASE_URL
 import dj_database_url, logging
 
+########## APP CONFIGURATION
+DJANGO_APPS = (
+    # Default Django apps:
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # Useful template tags:
+    # 'django.contrib.humanize',
+
+    # Admin panel and documentation:
+
+    'django.contrib.admin',
+    # 'django.contrib.admindocs',
+)
+
+THIRD_PARTY_APPS = (
+'rest_framework',
+)
+
+# Apps specific for this project go here.
+LOCAL_APPS = (
+'tasks',
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 DATABASES = {
 'default': dj_database_url.config(default='sqlite:///db.sqlite')
