@@ -25,3 +25,5 @@ STATICFILES_DIRS = (
 )
 
 SECRET_KEY = 'lg(sk)u*vp(3m12$+4*4q_8^-uc0v_y2wwnm5_v*_cil+n*_do'
+
+ROOT_URLCONF = 'todo.urls'
