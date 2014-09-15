@@ -13,12 +13,12 @@ app.controller('main', ['$scope', '$route', '$http', 'Task',
             };
 
             if (task.id) {
-                var url = 'http://127.0.0.1:8000/tasks/' + task.id + '/';
+                var url = 'http://dry-falls-4918.herokuapp.com/tasks/' + task.id + '/';
                 $http.put(url, data).then(function(result) {
                     console.log(result.data);
                 });
             } else {
-                var url = 'http://127.0.0.1:8000/tasks/';
+                var url = 'http://dry-falls-4918.herokuapp.com/tasks/';
                 $http.post(url, data).then(function(result) {
                     console.log(result.data);
                     $scope.tasklist.push(task);
