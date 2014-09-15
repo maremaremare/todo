@@ -1,7 +1,7 @@
 angular.module('todo')
   .provider('Task', function() {
     this.$get = ['$resource', function($resource) {
-      var Task = $resource('http://127.0.0.1:8000/tasks/:id/', {}, {
+      var Task = $resource('http://dry-falls-4918.herokuapp.com/tasks/:id/', {}, {
         update: {
           method: 'PUT'
         },
