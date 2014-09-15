@@ -1,5 +1,5 @@
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
+import dj_database_url, logging
 
 
 DATABASES = {
@@ -31,3 +31,20 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'lg(sk)u*vp(3m12$+4*4q_8^-uc0v_y2wwnm5_v*_cil+n*_do'
 
 ROOT_URLCONF = 'todo.urls'
+
+DEBUG = True
+
+if DEBUG:
+    # will output to your console
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+    )
+else:
+    # will output to logging file
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = '/my_log_file.log',
+        filemode = 'a'
+    )
